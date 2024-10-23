@@ -7,24 +7,26 @@ public class ApproxPi {
     //In: The number of terms to include (>= 1)
     //Out: The approximation of pi using the Leibniz formulation
     public static double approxPi(int terms) {
+        int index = 2;
         double pi = 1.0;
-        int denomOdd = 3;
-        int denomEven = 5;
-        while (terms > 0) {
-            if (terms > 1 && terms % 2 == 1) {
-                pi -= (1.0 / denomOdd);
-                denomOdd += 4;
-            } else if (terms == 1){
-                pi += (1.0 / denomEven);
-                denomEven += 4;
+        int counter = 3;
+        boolean minusSign = true;
+
+        while (index <= terms) {
+            if (minusSign) {
+                pi -= (1.0/counter);
+            } else {
+                pi += (1.0/counter);
             }
-            terms--;
+            minusSign = !minusSign;
+            index++;
+            counter += 2;
         }
-        return pi * 4.0;
+        return pi * 4;
     }
 
     public static void main(String[] args) {
-        System.out.println(approxPi(1));
+        System.out.println(approxPi(25));
     }
 }
 
